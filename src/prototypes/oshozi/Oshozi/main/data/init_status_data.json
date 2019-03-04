@@ -1,0 +1,228 @@
+[
+{
+    "fields": {
+        "description": "CM ALARM"
+    },
+    "model": "main.sound"
+},
+{
+    "fields": {
+        "description": "CM READY"
+    },
+    "model": "main.sound"
+},
+{
+    "fields": {
+        "description": "CM OMITED"
+    },
+    "model": "main.sound"
+},
+{
+    "fields": {
+        "description": "CM TAMPER"
+    },
+    "model": "main.sound"
+},
+{
+    "fields": {
+        "description": "CM CHORT CIRCUIT"
+    },
+    "model": "main.sound"
+},
+{
+    "fields": {
+        "description": "CM ALARM",
+        "url": "/media/alarm_sensor.png"
+    },
+    "model": "main.image"
+},
+{
+    "fields": {
+        "description": "CM READY",
+        "url": "/media/ready_sensor.png"
+    },
+    "model": "main.image"
+},
+{
+    "fields": {
+        "description": "CM OMITED",
+        "url": "/media/omited_sensor.png"
+    },
+    "model": "main.image"
+},
+{
+    "fields": {
+        "description": "CM TAMPER",
+        "url": "/media/default_sensor.png"
+    },
+    "model": "main.image"
+},
+{
+    "fields": {
+        "description": "CM CHORT CIRCUIT",
+        "url": "/media/default_sensor.png"
+    },
+    "model": "main.image"
+},
+{
+    "fields": {
+        "name": "CM ALARM",
+        "description": "CM ALARM",
+        "image": 1,
+        "sound": 1,
+        "color": 0
+    },
+    "model": "main.state"
+},
+{
+    "fields": {
+        "name": "CM READY",
+        "description": "CM READY",
+        "image": 2,
+        "sound": 2,
+        "color": 1
+    },
+    "model": "main.state"
+},
+{
+    "fields": {
+        "name": "CM OMITED",
+        "description": "CM OMITED",
+        "image": 3,
+        "sound": 3,
+        "color": 2
+    },
+    "model": "main.state"
+},
+{
+    "fields": {
+        "name": "CM TAMPER",
+        "description": "CM TAMPER",
+        "image": 4,
+        "sound": 4,
+        "color": 3
+    },
+    "model": "main.state"
+},
+{
+    "fields": {
+        "name": "CM CHORT CIRCUIT",
+        "description": "CM CHORT CIRCUIT",
+        "image": 5,
+        "sound": 5,
+        "color": 4
+    },
+    "model": "main.state"
+},
+{
+    "fields": {
+        "timestamp": "2015-06-19T12:36:16Z",
+        "kind": "INPUT",
+        "description": "CM ENTRADA PRINCIPAL",
+        "location": "PLANTA BAJA",
+        "status": 1
+    },
+    "model": "main.event"
+},
+{
+    "fields": {
+        "timestamp": "2015-06-19T12:36:37Z",
+        "kind": "INPUT",
+        "description": "CM ENTRADA PRINCIPAL",
+        "location": "PLANTA BAJA",
+        "status": 2
+    },
+    "model": "main.event"
+},
+{
+    "fields": {
+        "timestamp": "2015-06-19T12:36:50Z",
+        "kind": "INPUT",
+        "description": "CM ENTRADA PRINCIPAL",
+        "location": "PLANTA BAJA",
+        "status": 3
+    },
+    "model": "main.event"
+},
+{
+    "fields": {
+        "timestamp": "2015-06-19T12:40:37Z",
+        "kind": "INPUT",
+        "description": "CM ENTRADA PRINCIPAL",
+        "location": "PLANTA BAJA",
+        "status": 4
+    },
+    "model": "main.event"
+},
+{
+    "fields": {
+        "timestamp": "2015-06-19T12:40:59Z",
+        "kind": "INPUT",
+        "description": "CM ENTRADA PRINCIPAL",
+        "location": "PLANTA BAJA",
+        "status": 5
+    },
+    "model": "main.event"
+},
+{
+    "fields": {
+        "address": "192.168.240.251",
+        "description": "CONTROLADORA PB 1"
+    },
+    "model": "main.hwcontroller"
+},
+{
+    "fields": {
+        "controller": 1,
+        "description": "CM ENTRADA PRINCIPAL",
+        "mode": "INPUT",
+        "location": "PB ENTRADA PPAL"
+    },
+    "model": "main.device"
+},
+{
+    "fields": {
+        "controller": 1,
+        "description": "CM SALA COPERNICO",
+        "mode": "INPUT",
+        "location": "PB HALL"
+    },
+    "model": "main.device"
+},
+{
+    "fields": {
+        "controller": 1,
+        "description": "CM DESPACHO 1",
+        "mode": "INPUT",
+        "location": "PB PASILLO"
+    },
+    "model": "main.device"
+},
+{
+    "fields": {
+        "controller": 1,
+        "description": "CM OFFICE",
+        "mode": "INPUT",
+        "location": "PB PASILLO"
+    },
+    "model": "main.device"
+},
+{
+    "fields": {
+        "controller": 1,
+        "description": "CM DESPACHO 3",
+        "mode": "INPUT",
+        "location": "PB PASILLO"
+    },
+    "model": "main.device"
+},
+{
+    "fields": {
+        "controller": 1,
+        "description": "CM INFORMATICA",
+        "mode": "INPUT",
+        "location": "PB PASILLO"
+    },
+    "model": "main.device"
+}
+]

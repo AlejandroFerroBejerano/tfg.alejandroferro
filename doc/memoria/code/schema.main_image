@@ -1,0 +1,2 @@
+sqlite> .schema main_image
+CREATE TABLE "main_image" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "description" varchar(50) NOT NULL, "url" varchar(50) NOT NULL);

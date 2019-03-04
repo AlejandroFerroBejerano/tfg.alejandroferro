@@ -1,0 +1,51 @@
+\chapter{Conclusiones del Proyecto}
+\label{chap:conclusiones}
+
+\drop{E}n este capítulo se sintetizan y obtienen las conclusiones finales del trabajo realizado en el desarrollo de este proyecto, mostrando el grado de consecución de los objetivos que se establecieron en su comienzo. Además, se pretende dejar abierta una ventana hacia los trabajos futuros que pueden mejorar y extender las funcionalidades del sistema desarrollado. 
+
+Todos los recursos generados a lo largo del proyecto están disponibles en un repositorio público de BitBucket en la siguiente dirección \url{https://bitbucket.org/arco_group/tfg.alejandroferro}.
+
+\section{Análisis de la consecución de los objetivos}
+
+El objetivo principal de nuestro proyecto era conseguir desarrollar una plataforma que permitiese supervisar
+elementos de intrusión de \acs{GII} o \acs{GIII} de una forma cómoda y sencilla para los usuarios que lo operasen. Para ello se ha empleado una solución basada en hardware de bajo coste y de propósito general, con el fin de hacer más asequible la implantación en un entorno real. A continuación se analiza el grado de consecución de aquellos objetivos específicos que se plantearon para validar la viabilidad de la implantación de nuestra solución en un marco comercial.
+
+\begin{itemize}
+\item \textbf{Arquitectura tolerante a ciertos fallos:} El cumplimiento de este objetivo se basaba en el suministro de información a través de la consola, mostrando aquellos errores que se iban produciendo en el sistema como podían ser la caída de la aplicación de gestión o de una de las controladoras. Teniendo en cuenta la premisa anterior podemos considerar que el objetivo se ha cumplido en su totalidad, ya que nuestro sistema de emulación tiene tres modos de ejecutarse: 
+\begin{enumerate}
+\item \textbf{make run-server:} Muestra por consola toda la información básica, desde que se genera un evento hasta que se crea en la aplicación web.
+\item \textbf{make run-server-v:} Muestra por consola en detalle, toda la información desde que se genera un evento hasta que se crea en la aplicación web.
+\item \textbf{make run-server-to-log:} Envía al fichero \textit{emulation\_environment.log} toda la información, desde que se genera un evento hasta que se crea en la aplicación web.
+\end{enumerate}
+
+\item \textbf{Capacidad integradora:} Este objetivo se considera completamente conseguido gracias a que se ha desarrollado una \acs{API}-\acs{REST} con los \textit{endpoints} necesarios para poder hacer cualquier tipo de operación \acs{CRUD} sobre las controladoras hardware, los dispositivos y los eventos almacenados en la \acs{BBDD}.
+
+\item \textbf{Autenticación:} Este es un objetivo esencial dentro de cualquier concepto que incluya la palabra seguridad y aunque su alcance pueda ser bastante amplio en cuanto a los mecanismos de implantación de la autenticación, en nuestro proyecto se consideraba conseguida si autenticábamos en la aplicación de gestión y como complemento en alguno de los mecanismos de integración desarrollados (\acs{API}-\acs{REST}). Además, este objetivo perseguía la consecución de al menos dos roles de usuarios, el de \textit{administrador}, con control total sobre toda la arquitectura y componentes desarrollados y el de \textit{operador}, aspecto que resolvemos a través de la interfaz de administración de usuarios de \textit{Django}.
+
+\item \textbf{Estados bien conocidos y definidos:} La consecución de este objetivo se conseguía a través de la capacidad del sistema de brindar información actualizada y veraz sobre el estado de cada uno de los sensores y además deberá discernir entre los estados de \textit{alarma}, \textit{reposo}, \textit{sabotaje}, \textit{cortocircuito} y \textit{enmascaramiento} del sensor. Este objetivo se considera conseguido, ya que no solo se muestran los eventos ordenados en una tabla donde el campo \textit{States} alberga el estado del detector que genera el evento, también se colorea cada estado con un color diferente y se permite la asignación de una imagen distinta para cada uno de los estados.
+
+\item \textbf{Interfaz amigable:} Este objetivo se considera parcialmente conseguido porque aunque el sistema de seguridad cuenta con una interfaz de usuario sencilla, cómoda e intuitiva que muestra la información a través de unos estados bien conocidos y definidos, no se dispone de una interfaz resumen o un sinóptico que permita al usuario conocer el estado en que se encuentra la instalación en ese momento.
+
+\item \textbf{Relación de costes bajo: }Este objetivo se considera parcialmente conseguido, porque a pesar de no haberse desplegado el sistema sobre un hardware de bajo coste real durante su desarrollo, sí se ha conseguido un método de emulación que bien valdría para supervisar otra clase de elementos que no está intrínsecamente ligados a la seguridad. De igual manera la adaptación del código utilizado en el sistema de emulación hardware a una controladora real, no debería suponer un reto inalcanzable ya que la interacción entre Arduino y una \acs{API}-\acs{REST} constituye un caso conocido y bien documentado en varios ejemplos a disposición de la comunidad.
+
+\end{itemize} 
+
+\section{Trabajos futuros}
+
+Si analizamos la consecución de los objetivos expuestos anteriormente y toda la información acerca de los sistemas de seguridad comerciales que se han ido detallado con anterioridad (ver Capítulo~\ref{chap:antecedentes}), podemos concluir en la necesidad de ampliar este \acs{TFG} con las siguientes funcionalidades.
+
+\begin{itemize}
+
+\item \textbf{Nuevos estados lógicos:} Hace alusión a la posibilidad de asignar a un dispositivo el estado de \textit{omitido}, \textit{armado}, \textit{avería} para poder extender los contextos en los que el sistema y los usuarios interactúan con los dispositivos.
+
+\item \textbf{Nuevos modos de funcionamiento:} Sugiere la posibilidad de poder asignar un modo de funcionamiento específico a un dispositivo sin necesidad de tener que definir el modo en si mismo y que el sistema sea capaz de asimilar, gestionar y representar la información y acciones llevadas a cabo sobre el dispositivo (ver Sección~\ref{sub:particiones_zonas} del Capítulo~\ref{chap:antecedentes}).  
+
+\item \textbf{Parametrización por grupos:} Hace alusión al agrupamiento de los dispositivos en grupos sobre los cuales se puedan aplicar modos de funcionamiento, horarios, calendarios y acciones. De esta forma, todos los elementos de un mismo grupo comparten la misma parametrización de configuración aplicada y ejecutan de forma unísona las acciones requeridas por los usuarios o el sistema.
+
+\item \textbf{Reglas acción-reacción:} Hace referencia a la posibilidad de parametrización de reglas que se disparen ante la llegada de eventos al sistema y que permitan comportamientos avanzados cómo el disparo de sirenas, envíos de correos electrónicos, encendido de luces, crear copias de seguridad automáticas del sistema y su \acs{BBDD}, etc.
+
+\item \textbf{Interfaz de resumen de eventos:} Hace referencia a una interfaz donde el usuario pueda ver de forma resumida el número exacto de dispositivos o grupos en un estado específico. Además esta interfaz debe de ser capaz de mostrar información relevate como, las medias aritméticas de los dispositivos que más alarmas generan, controladoras que más alarmas supervisan y tiempos medios de un dispositivo en cada uno de los estados lógicos definidos.
+
+\item \textbf{Sinóptico de gestión:} Hace referencia a una interfaz que pueda representar la distribución física y estado de los elementos de una instalación en un plano. Además esta interfaz debe de ser navegable y poder albergar la planimetría del recinto con una estructura arbórea que facilite la visualización e interacción con los dispositivos.
+
+\end{itemize}

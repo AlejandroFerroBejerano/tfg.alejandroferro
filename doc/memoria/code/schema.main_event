@@ -1,0 +1,2 @@
+sqlite> .schema main_event
+CREATE TABLE "main_event" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "timestamp" datetime NOT NULL, "kind" varchar(10) NOT NULL, "description" varchar(50) NOT NULL, "location" varchar(50) NOT NULL, "status_id" integer NOT NULL REFERENCES "main_state" ("id"));

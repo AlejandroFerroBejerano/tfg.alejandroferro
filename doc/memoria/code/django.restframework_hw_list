@@ -1,0 +1,21 @@
+Python 2.7.12 (default, Jun 29 2016, 08:18:26) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import requests, requests.exceptions, sys, datetime, ast, json
+>>> url='http://127.0.0.1:8081/api/hw/'
+>>> ret=request.get(url)
+>>> ret
+<Response [200]>
+>>> ret.json()
+{u'count': 1, u'previous': None, u'results': [{u'description': u'CONTROLADORA PB 1', u'id': 1, u'address': u'192.168.240.251'}], u'next': None}
+>>> ret.json()['results']
+[{u'description': u'CONTROLADORA PB 1', u'id': 1, u'address': u'192.168.240.251'}]
+>>> json.dumps(ret.json()['results'])
+'[{"description": "CONTROLADORA PB 1", "id": 1, "address": "192.168.240.251"}]'
+>>> type(json.dumps(ret.json()['results']))
+<type 'str'>
+>>> hw_list = ast.literal_eval(json.dumps(ret.json()['results']))
+>>> hw_list
+[{'address': '192.168.240.251', 'description': 'CONTROLADORA PB 1', 'id': 1}]
+>>> type(hw_list)
+<type 'list'>

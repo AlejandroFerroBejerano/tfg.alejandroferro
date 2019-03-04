@@ -1,0 +1,2 @@
+sqlite> .schema main_state
+CREATE TABLE "main_state" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(50) NOT NULL, "description" varchar(100) NOT NULL, "color" smallint unsigned NOT NULL, "image_id" integer NOT NULL REFERENCES "main_image" ("id"), "sound_id" integer NOT NULL REFERENCES "main_sound" ("id"));

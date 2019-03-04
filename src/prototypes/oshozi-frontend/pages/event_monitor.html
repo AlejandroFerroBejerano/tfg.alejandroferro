@@ -1,0 +1,96 @@
+<div class="container" ng-app="oshoziApp" ng-controller="event_monitorController">
+  
+  <<!-- div class="alert alert-info">
+    <p>Sort Type: {{ sortType }}</p>
+    <p>Sort Reverse: {{ sortReverse }}</p>
+    <p>Search Query: {{ searchFish }}</p>
+  </div> -->
+  
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search da Message Recived" ng-model="searchMessage">
+      </div>      
+    </div>
+  </form>
+  
+  <table class="table table-bordered table-striped">
+    
+    <thead>
+      <tr>
+        <td>
+          <a href="#/event_monitor" ng-click="sortType = 'date'; sortReverse = !sortReverse">
+            Date
+            <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/event_monitor" ng-click="sortType = 'time'; sortReverse = !sortReverse">
+          Time
+            <span ng-show="sortType == 'time' && !sortReverse"></span>
+            <span ng-show="sortType == 'time' && sortReverse"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/event_monitor" ng-click="sortType = 'type'; sortReverse = !sortReverse">
+          Type 
+            <span ng-show="sortType == 'type' && !sortReverse"></span>
+            <span ng-show="sortType == 'type' && sortReverse"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/event_monitor" ng-click="sortType = 'description'; sortReverse = !sortReverse">
+          Description 
+            <span ng-show="sortType == 'description' && !sortReverse"></span>
+            <span ng-show="sortType == 'description' && sortReverse"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/event_monitor" ng-click="sortType = 'location'; sortReverse = !sortReverse">
+          Location 
+            <span ng-show="sortType == 'location' && !sortReverse"></span>
+            <span ng-show="sortType == 'location' && sortReverse"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/event_monitor" ng-click="sortType = 'status'; sortReverse = !sortReverse">
+          Status 
+            <span ng-show="sortType == 'status' && !sortReverse"></span>
+            <span ng-show="sortType == 'status' && sortReverse"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#/event_monitor" ng-click="sortType = 'group'; sortReverse = !sortReverse">
+          Group 
+            <span ng-show="sortType == 'group' && !sortReverse"></span>
+            <span ng-show="sortType == 'group' && sortReverse"></span>
+          </a>
+        </td>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr ng-repeat="event in message | orderBy:sortType:sortReverse | filter:searchMessage">
+        <td>{{ event.date }}</td>
+        <td>{{ event.time}}</td>
+        <td>{{ event.type}}</td>
+        <td>{{ event.description}}</td>
+        <td>{{ event.location}}</td>
+        <td>{{ event.status}}</td>
+        <td>{{ event.group}}</td>
+      </tr>
+    </tbody>
+    
+  </table>
+  
+  <p class="text-center text-muted">
+    <a href="#" target="_blank">Read the Tutorial</a>
+  </p>
+  
+  <p class="text-center">
+    by <a href="http://scotch.io" target="_blank">scotch.io</a>
+  </p>
+  
+</div>

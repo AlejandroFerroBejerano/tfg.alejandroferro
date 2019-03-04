@@ -1,0 +1,37 @@
+\chapter{Arduino MEGA ADK}
+\label{chap:anexo1}
+
+\section{Visión Global}
+
+El Arduino MEGA ADK es una placa electrónica basada en el chip Atmega2560. Tiene una interfaz de host USB para conectar con los teléfonos basados en Android, basado en el MAX3421E. Cuenta con 54 pines digitales de entrada/salida (de los cuales 15 se pueden utilizar como salidas PWM), 16 entradas analógicas, 4 UARTs (puertos serie de hardware), un 16 MHz oscilador de cristal, una conexión USB, un conector de alimentación, una cabecera ICSP, y un botón de reinicio\cite{ArduinoMegaADK}. La novedad que presenta el \href{https://developer.android.com/adk/index.html}{\textit{ADK de Google}} es que es una plataforma de hardware abierta para la creación de nuevos dispositivos. De cara a ayudar a los desarrolladores, Google ha creado esta librería dentro del \href{http://android-sdk.uptodown.com/windows}{\textit{Android \acs{SDK}}}, el sistema de desarrollo de aplicaciones móviles Android.
+
+\section{Especificaciones Técnicas}
+
+ \begin{table}[h!]
+  \centering
+  \caption{Características Arduino MEGA ADK \cite{ArduinoMegaADK}}
+  \label{tab:ADK}
+  \zebrarows{1}
+  \begin{tabular}{p{0.48\textwidth}p{0.48\textwidth}}
+    \hline
+    \textbf{Característica} & \textbf{Valor} \\
+    \hline
+    Microcontrolador & Atmega2560 \\
+    Tensión de funcionamiento & 5V \\
+    Voltaje de entrada (recomendado) & 7-12V \\
+    Entradas/Salidas & 54 (de los cuales 15 proporcionan salida PWM) \\
+    Pines de entrada analógica & 16 \\
+    Corriente continua para Pin I/O & 40mA \\
+    Corriente CC para Pin 3.3V & 50 mA \\
+    Memoria flash & 256 KB, 8 KB utilizado por el gestor de arranque \\
+    SRAM & 8 KB \\
+    EEPROM & 4 KB \\
+    Frecuencia de reloj & 16 MHz \\
+    USB Chip & MAX3421E \\
+    Longitud & 101.52 mm \\
+    Anchura & 53,3 mm \\
+    Peso & 50 36 g \\
+    \hline
+  \end{tabular}
+\end{table}
+

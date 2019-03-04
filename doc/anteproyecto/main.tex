@@ -1,0 +1,483 @@
+\documentclass{pre-tfg}
+\usepackage{custom}
+
+% \showhelp  % comenta o borra para eliminar ayudas
+
+% \title{Oshozi: Sistema de seguridad multiplataforma sobre Arduino-Yun}
+\title{Oshozi: Sistema de Seguridad Física Multiplataforma}
+\author{Alejandro Julián Ferro Bejerano}
+\advisorFirst{David Villa Alises}
+\advisorSecond{María José Santofimia Romero}
+\advisorDepartment{Departamento de Tecnologías y Sistemas de Información}
+\intensification{Tecnologías de la Información}
+\docdate{2015}{Septiembre}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+\section{INTRODUCCIÓN}
+
+En 1943 Abraham Maslow propuso la teoría de las necesidades humanas. Obtuvo una gran
+notoriedad, no sólo en el ámbito psicológico sino también en el empresarial. Esta teoría
+sostiene que la seguridad ocupa el segundo escalón más importante de la pirámide de las
+necesidades humanas, quedando sólo por detrás de las necesidades fisiológicas.
+
+Un sistema de seguridad trata de salvagualdar la integridad de personas, bienes materiales y recintos mediante la colocación estratégica de varios dispositivos con el fin de detectar presencia no autorizadas e intrusiones. 
+
+Hoy en día los sistemas de seguridad tienen un alto grado de automatización basado en un conjunto de sensores y tecnologías de comunicaciones, así como software de gestión que evalúa las potenciales situaciones de riesgo y es capaz de reaccionar de forma autónoma o como apoyo al personal de seguridad.
+
+Con el propósito de estandarizar algunos aspectos relativos a los sistemas de seguridad privada, en 2011 se emiten una serie de órdenes ministeriales en las que se establece una categorización en grados de seguridad a las instalaciones y a los elementos que la conforman, atendiendo a los niveles de riesgo a los que cada uno de ellos hace frente. Así, un grado 2 se refiere a un nivel de riesgo bajo a medio, dedicado a viviendas y pequeños
+establecimientos, comercios e industrias en general, que pretendan conectarse a una central receptora de alarmas o, en su caso, a un centro de control. El grado 3 queda reservado para instalaciones de riesgo medio/alto en establecimientos comerciales o industriales a los que por su actividad se les exija disponer de conexión a central receptora de alarmas o, en su caso, a un centro de control. Para esta última categoría o grado, se exige que tanto los detectores como los contactos magnéticos e infrarrojos puedan presentar los estados de: alarma, reposo, tamper, cortocircuito y sabotaje~\cite{BOE}.
+
+Aunque hace unos años los sistemas de seguridad eran utilizados en el ámbito industrial mayoritáriamente, hoy en día existen alternativas adaptadas al mercado doméstico que han provocado una rápida evolución y aparición de nuevos dispositivos, sistemas y fabricantes que operan en este sector. 
+
+Sin embargo, tradicionalmente el sector de la seguridad ha estado dominado prácticamente en su totalidad por tecnologías propietarias. Este tipo de sistemas constan habitualmente de una central y software de gestión que se licencian en función de las cracterísticas de la instalación y en algunos casos por períodos contratados. Además la mayoría de estos sistemas tradicionales se basan en una arquitectura centralizada, siendo más vulnerables ante fallos tanto arbitrarios como intencionados, ya que tienen un punto de fallo que inutiliza todo el sistema. 
+
+Por otra parte, el grado de penetración de las nuevas tecnologías de cara a la usabilidad de las interfaces de usuarios es escasa en este sector. La gran mayoría de aplicaciones de gestión poseen interfaces poco amigables e intuitivas que dificultan su uso sin formación previa, haciendo que en ocaciones no se exploten en su totalidad las funcionalidades que realmente brindan los sistemas.
+
+Esta situación ha provocado que el mercado adopte como norma este método de trabajo, dificultando seriamente la entrada de nuevos productos salvo para aquellas empresas que ya disponen de renombre o que poseen un capital considerable como para hacerse un hueco en la industria de la seguridad~\cite{garc2007hesperia}.
+
+Teniendo en cuenta todo lo anterior y atendiendo al panorama actual de los sistemas de seguridad privada, se puede afirmar que los avances tecnológicos no están siendo apropiadamente adoptados por esta industria~\cite{PPavan2015}. En este sentido, la aparición de plataformas hardware de bajo coste como Arduino\footnote{\url{https://www.arduino.cc/}} y las oportunidades que se derivan de su capacidad de interconexión plantean un escenario idóneo para estudiar su posible aplicación a entornos tan restrictivos como el de la seguridad.  
+
+Por todo ello, en este Trabajo Fin de Grado se pretende abordar estos problemas desarrollando un sistema completo de seguridad, utilizando hardware de bajo coste. El enfoque principal de esta solución será ofrecer interoperabilidad, de modo que dispositivos de fabricantes cualesquiera, puedan cohexistir para realizar despliegues no triviales. Para logralo, es esencial utilizar protocolos y mecanismos de interacción abiertos, bien documentados y reconocidos por la comunidad, igual que ocurre en otros muchos ecosistemas como pueden ser la telefonía móvil. Además, se pretende abordar la problemática de la centralización, proponiendo una arquitectura más descentralizada en la que, ante fallos en las comunicaciones o en los sistemas de gestión, se pudiera ofrecer un comportamiento degradado, de modo que controladores individuales puedan seguir ofreciendo valor a la instalación.
+
+No obstante a todo lo expuesto aquí, actualmente hay fabricantes que se esfuerzan no sólo por llegar a satisfacer las necesidades del mercado, sino también por innovar. Un ejemplo de plataformas integradoras puramente españolas son: Desico\footnote{\url{http://www.desico.com/es/}} y Dorlet\footnote{\url{http://www.dorlet.com/}}. Ambas empresas venden sistemas o plataformas de integración donde ofrecen gestión de los elementos de intrusión, CCTV, control de accesos e interfonía sobre la misma interfaz, pero en ambos casos y por lo costoso de las certificación en grado, no ofrecen su producto como un sistema de seguridad como podría ser Honeywell~\cite{Honeywell}, que fabrica centrales de seguridad de grado 2 y grado 3.
+
+
+
+% El capítulo de introducción podrá abordar los siguientes aspectos:
+
+% \begin{itemize}
+% \item Introducción al tema, entorno en el que el trabajo desempeñará
+%   su objetivo, justificación de la importancia del trabajo abordado.
+% \item Motivación y antecedentes (con algunas referencias bibliográficas).
+% \item Descripción gráfica del proyecto (es aconsejable incorporar una figura que describa
+%   el trabajo a desarrollar y que mejore la comprensión del mismo).
+% \end{itemize}
+
+
+% \section{TECNOLOGÍA ESPECÍFICA \hfill / INTENSIFICACIÓN / ITINERARIO \mbox{CURSADO POR EL ALUMNO}}
+\section{TECNOLOGÍA ESPECÍFICA / INTENSIFICACIÓN / ITINERARIO CURSADO POR EL ALUMNO}
+
+% El Trabajo Fin de Grado (TFG, de ahora en adelante) siempre deberá demostrar la aplicación
+% de las competencias generales de la titulación. Además, el TFG deberá aplicar
+% \textbf{algunas} de las competencias específicas asociadas a la \textbf{Tecnología
+%   Específica o Intensificación} que el alumno ha cursado. Por lo tanto, el alumno incluirá
+% en el anteproyecto \textbf{dos tablas}. Una tabla para seleccionar la tecnología cursada y
+% en la que se contextualiza el TFG:
+
+\begin{table}[hp]
+  \centering
+  \caption{Tecnología Específica cursada por el alumno}
+  \label{tab:tec-especifica}
+
+  \zebrarows{1}
+  \begin{tabular}{p{0.6\textwidth}}
+    \textbf{Marcar la tecnología cursada} \\
+    \hline
+    Tecnologías de la información \hspace*{2cm} \textbf{X}\\
+    Computación \\
+    Ingeniería del Software \\
+    Ingeniería de Computadores \\
+    \hline
+  \end{tabular}
+\end{table}
+
+
+% En la segunda tabla, el alumno deberá justificar cómo \textbf{algunas}
+% de las competencias específicas de la intensificación se aplicarán o
+% tomarán forma en el TFG, \textbf{La relación de competencias por
+%   intensificación se encuentran en el Anexo I al final de este
+%   documento. }
+
+
+\begin{table}[hp]
+  \centering
+  \caption{Justificación de las competencias específicas abordadas en el TFG}
+  \label{tab:competencias}
+
+  \zebrarows{1}
+  \begin{tabular}{p{0.5\linewidth}p{0.5\linewidth}}
+    \textbf{Competencia} & \textbf{Justificación} \\
+    \hline
+    %Capacidad para comprender el entorno de una organización y sus necesidades en el ámbito de las tecnologías de la información y las comunicaciones. & [Exponer y argumentar cómo y en qué parte se va a abordar esta competencia en el TFG]\\
+    Capacidad para seleccionar, diseñar, desplegar, integrar, evaluar, construir, gestionar, explotar y mantener las tecnologías de hardware, software y redes, dentro de los parámetros de coste y calidad adecuados.& Esta competencia se abordará durante todo el proyecto, por tener que valorar el coste, limitaciones y requerimientos de la tecnología empleada para llegar a satisfacer los objetivos propuestos en el proyecto sin sobrepasar el presupuesto estimado para el mismo. \\
+    Capacidad para emplear metodologías centradas en el usuario y la organización para el desarrollo, evaluación y gestión de aplicaciones y sistemas basados en tecnologías de la información que aseguren la accesibilidad, ergonomía y usabilidad de los sistemas.& Esta competencia se abordará desde el punto de vista de la ergonomía y la usabilidad de la interfaz de la aplicación web.  \\
+    Capacidad para seleccionar, diseñar, desplegar, integrar y gestionar redes e infraestructuras de comunicaciones en una organización.& Este punto se aborda por el hecho de tener que diseñar una red sobre la que se despliegue el prototipo, usualmente la propia red o infraestructura de la organización. \\
+    % Capacidad para seleccionar, desplegar, integrar y gestionar sistemas de información que satisfagan las necesidades de la organización, con los criterios de coste y calidad identificados. & [Exponer y argumentar cómo y en qué parte se va a abordar esta competencia en el TFG] \\
+    % Capacidad de concebir sistemas, aplicaciones y servicios basados en tecnologías de red, incluyendo Internet, web, comercio electrónico, multimedia, servicios interactivos y computación móvil. & [Exponer y argumentar cómo y en qué parte se va a abordar esta competencia en el TFG] \\
+    % Capacidad para comprender, aplicar y gestionar la garantía y seguridad de los sistemas informáticos. & [Exponer y argumentar cómo y en qué parte se va a abordar esta competencia en el TFG] \\
+
+    \hline
+  \end{tabular}
+\end{table}
+
+\pagebreak
+
+\section{OBJETIVOS}
+
+% De acuerdo a la Introducción, el alumno deberá especificar cuál o cuáles son las hipótesis
+% de trabajo de las que se parten, qué se pretende resolver, y en base a eso formular el
+% objetivo principal del TFG.
+
+% El objetivo principal deberá desglosarse en sub-objetivos parciales. Los sub-objetivos
+% deberán describirse de forma breve y concisa.
+
+% Como preámbulo a la formulación del objetivo parcial, el alumno deberá discutir sobre las
+% limitaciones y condicionantes a tener en cuenta en el desarrollo del TFG (lenguaje de
+% desarrollo, equipos, madurez de la tecnología, etc.).
+
+% Del mismo modo, será recomendable incluir una lista preliminar de requisitos del sistema a
+% construir.
+
+Una vez descritos brevemente los fundamentos que motivan este Trabajo Fin de Grado,
+explicaremos cuál será el objetivo principal, así como los requisitos que, a primera
+vista, se han identificado.
+
+El objetivo principal de este proyecto es el de crear una plataforma que permita
+supervisar elementos de intrusión de grado 3 de una forma cómoda y sencilla al usuario que lo
+opera. Para ello, y complementando esta idea, se creará una solución sobre hardware de bajo
+coste y de propósito general, con el fin de hacer más asequible la implantación en un
+entorno real.
+
+La validación de este objetivo se conseguirá mediante el desarrollo de una
+maqueta, a pequeña escala, donde se desplegará dicho hardware y el nivel de seguridad
+ofrecido podrá ser verificado.
+
+\subsection{Primeros requisitos detectados}
+\begin{itemize}
+\item La aplicación deberá ofrecer como mínimo dos roles de usuarios, uno administrador que
+  tendrá la capacidad de configurar el sistemas y operar íntegramente en él y otro el de
+  operador que se le asignará a los usuarios destinados a usar y gestionar el sistema sin
+  llegar a acceder a ninguna vista o aspecto de configuración.
+\item Una de las características principales de la aplicación y del sistema en sí, es que
+  debe brindar a los usuarios una interfaz amigable y cómoda desde el punto de vista de
+  la accesibilidad y la usabilidad.
+\item La aplicación de gestión del sistema deberá tener la capacidad de ser ser
+  multiplataforma, pudiendo ser operada desde cualquier dispositivo o sistema operativo
+  que permita la navegación web.
+\item En términos de costes se necesita que el despliegue de lo que sería la electrónica
+  de gestión del sistema, no los sensores, de lo que se consideraría una instalación
+  pequeña 16 elementos no exceda los 100€ en costes.
+\item De cara a la conectividad, el sistema debe ser capaz ofrecer la posibilidad de
+  integrar su electrónica de gestión sobre una red existente ya sea cableada o inalámbrica
+  sin la necesidad de adquirir un hardware extra.
+\item Asimismo, las placas de gestión deben ofrecer la capacidad de ser tolerantes a
+  cortes en el cableado de la red de comunicaciones, si así lo estimase el instalador o
+  usuario final.
+\item El sistema debe ser capaz brindar información actualizada y veraz sobre el estado de
+  cada uno de los sensores y además deberá discernir entre los estados de \textit{alarma},
+  \textit{reposo}, \textit{sabotaje}, \textit{cortocircuito} y \textit{enmascaramiento}
+  del sensor, en caso de que este disponga de esta última opción.
+\end{itemize}
+
+
+\section{MÉTODO Y FASES DE TRABAJO}
+
+Para el desarrollo de este Trabajo Fin de Grado se ha decidido optar por una metodología
+de \textbf{prototipado evolutivo}~\cite{Pressman} debido a que todos los requisitos
+funcionales de la aplicación no están completamente definidos al comienzo del proyecto. Se
+incorporarán o modificarán durante el transcurso del proyecto, una vez se valide el
+diseño general en los primeros prototipos.
+
+Al optar por esta metodología, se obtendrán prototipos funcionales del sistema donde parte
+de los componentes serán versiones simplificadas, pero a cambio se ofrece un demostrador
+que evidencia el objetivo que se persigue, en períodos relativamente cortos de tiempo. De
+esta manera podemos evaluar el sistema en cada iteración, y evitar gastar tiempo y
+recursos en funcionalidades que no ofrecen valor.
+
+Por otra parte, para gestionar la evolución y planificación del proyecto se ha optado por
+utilizar \textbf{Kanban}~\cite{Kanban} por su sencillez, ligereza y agilidad, así como por
+la cantidad de herramientas y sitios \textit{open source} y gratuitos que están en la nube
+a disposición de los usuarios para la aplicación de la misma.
+
+
+\section{MEDIOS QUE SE PRETENDEN UTILIZAR}
+
+\subsection{Medios Hardware}
+
+Como medios hardware a utilizar  cabe mencionar el uso de dispositivos
+que se detallan a continuación y sus principales características.
+
+\subsubsection{Arduino Yún}
+
+El Arduino Yún es una placa  electrónica que fusiona dos entornos para
+ofrecer  lo mejor  de  ambos. Por  una parte  tenemos  un entorno  con
+distribución  Linux  basado  en  OpenWrt  denominado  OpenWrt-Yun  que
+incorpora  un  procesador  Atheros   AR9331,  que  permite  todas  las
+funcionalidades  básicas  de un  sistema  operativo.   Por otra  parte
+tenemos  el microcontrolador  ATmega32u4 que,  al igual  que en  otros
+modelos de  Arduino, se  encarga de  la ejecución  de subrutinas  y el
+control de los canales  de entrada/salida, solo que  en este caso la
+placa cuenta con  un bridge de comunicaciones que  confiere al entorno
+Arduino  la capacidad  ejecutar  scripts shells,  comunicarse con  las
+interfaces de red y recibir información de su entorno vecino.
+
+\begin{table}[h!]
+  \centering
+  \caption{Características Principales Arduino-Yún. \cite{Arduino} }
+  \label{tab:arduino-yun}
+  \begin{tabular}{{p{0.325\linewidth}p{0.325\linewidth}p{0.325\linewidth}}}
+    \hline
+    \multicolumn{1}{l}{} & \textbf{Característica} & \textbf{Valor}\\
+    \hline
+      \multirow{6}{*}{Entorno Linux}  & \cellcolor[HTML]{E6E6E6} Procesador & \cellcolor[HTML]{E6E6E6} Atheros AR9331\\
+                                      & Arquitectura & MIPS @400 MHz \\
+                                      & \cellcolor[HTML]{E6E6E6} RAM & \cellcolor[HTML]{E6E6E6} 64MB DDR2 \\
+                                      & Memoria FLASH & 16 MB \\
+                                      & \cellcolor[HTML]{E6E6E6} Ethernet & \cellcolor[HTML]{E6E6E6} IEEE 802.3 10/100Mbit/s \\
+                                      & WiFi & IEEE 802.11b/g/n \\
+                                      \hline
+    \multirow{6}{*}{Entorno Arduino}  & \cellcolor[HTML]{E6E6E6} Microcontrolador & \cellcolor[HTML]{E6E6E6} ATmega32u4\\
+                                      &  Frecuencia Reloj & 16 MHZ \\
+                                      & \cellcolor[HTML]{E6E6E6} SRAM & \cellcolor[HTML]{E6E6E6} 2.5 KB \\
+                                      &  Memoria FLASH & 32 KB \\
+                                      &  \cellcolor[HTML]{E6E6E6} EEPROM & \cellcolor[HTML]{E6E6E6} 1 KB \\
+                                      & Entradas Analógicas & 20 \\
+  \end{tabular}
+\end{table}
+
+\subsubsection{Raspberry Pi 2 Modelo B}
+
+La  Raspberry  Pi  2  Modelo  B,   es  un  micro  ordenador  de  altas
+prestaciones  que  no solo  tiene  un  rendimiento increíble,  también
+ofrece un sinfín de posibilidades a un precio sumamente competitivo. El
+hecho de  tener unas dimensiones  y un  consumo muy reducido  hacen de
+ella el equipo  ideal para desplegar un servidor web  o cualquier otro
+tipo de  servicio on-line, pudiendo  ubicarse el hardware  en cualquier
+armario o cuarto técnico sin necesidad de tener un mobiliario grande o
+costoso (racks,  mesas, etc.). Por  todos estos motivos se  ha decidido
+utilizar este dispositivo como servidor del sistema de seguridad.
+
+\begin{table}[h!]
+  \centering
+  \caption{Características Raspberry Pi 2 Modelo B. \cite{RaspberryPi2ModelB}}
+  \label{tab:raspberrypi2}
+  \zebrarows{1}
+  \begin{tabular}{p{0.48\textwidth}p{0.48\textwidth}}
+    \hline
+    \textbf{Característica} & \textbf{Valor} \\
+    \hline
+    Procesador & A 900MHz quad-core ARM Cortex-A7 CPU\\
+    Memoria & 1 GB LPDDR2 SDRAM 450 MHz \\
+    USB 2.0 & 4 \\
+    GPU & Broadcom VideoCore IV 250 MHz \\
+    Salida Gráficos & HDMI 1.4 @ 1920x1200 píxeles \\
+    Audio & Jack 3.5mm y vídeo compuesto \\
+    Almacenamiento & Micro SD \\
+    Ethernet & 10/100 Mbps \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsubsection{Aritech EV1012 PIR Detector}
+
+Para poder testear  el comportamiento real del sistema  se ha decidido
+montar una pequeño circuito de ejemplo.  La maqueta de ejemplo no solo
+servirá  para hacer  pruebas sino  que marcará  ciertos requisitos  de
+integración  por   ser  un   dispositivo  de  seguridad   empleado  en
+instalaciones de grado 2 y 3.
+
+\begin{table}[h!]
+  \centering
+  \caption{Características del Aritech EV1012 PIR Detector. \cite{EV1012}}
+  \label{tab:ev1012}
+  \zebrarows{1}
+  \begin{tabular}{p{0.48\textwidth}p{0.48\textwidth}}
+    \hline
+    \textbf{Característica} & \textbf{Valor} \\
+    \hline
+    Rango & 12 m\\
+    Cortinas Opticas & 9  \\
+    Potencia de Entrada & 9 a 15 VCC (12 V nominal)\\
+    Picos & 2 - 12 VCC \\
+    Tiempo Arranque & 25 s \\
+    Consumo Máximo & 11 mA \\
+    Temperatura & -10 $^{\circ}$C a +55 $^{\circ}$C\\
+    \hline
+  \end{tabular}
+\end{table}
+
+
+\subsubsection{Lenovo ThinkPad E550}
+
+A  continuación  se  describen  las  características  principales  del
+ordenador donde se hará el desarrollo.
+
+\begin{table}[h!]
+  \centering
+  \caption{Características Lenovo ThinkPad E550. \cite{Lenovo}}
+  \label{tab:Lenovo}
+  \zebrarows{1}
+  \begin{tabular}{p{0.48\textwidth}p{0.48\textwidth}}
+    \hline
+    \textbf{Característica} & \textbf{Valor} \\
+    \hline
+    Pantalla & 15,6''\\
+    CPU & Intel Core I5  \\
+    Memoria & 4GB \\
+    Gráficos & NVIDIA GeForce 940M 1GB \\
+    Almacenamiento & 500 GB \\
+    Peso & 2,8 Kg\\
+    Sistema Operativo & Debian GNU/Linux 64 bits\\
+    Kernel &  3.16.0-4-amd64\\
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsection{Medios Software}
+A continuación se mencionan  algunas de las herramientas, aplicaciones
+y  lenguajes  que  se  estiman  que  harán  falta  para  completar  el
+desarrollo del proyecto.
+
+Entre los editores de texto podemos destacar: Ligth Table, Sublime Text y Emacs. En cuanto a lenguajes de programación, marcado y estilo: Python, Javascript, HTML5 y CSS3. Frameworks de desarrollo y bases de datos: Cero C Ice, AngularJS y SQUL Lite
+
+\singlespace
+\section{REFERENCIAS}
+
+% En esta sección se incluirán todas las referencias bibliográficas, ordenadas
+% alfabéticamente por el primer apellido del primer autor, de las obras de las cuales se
+% haya realizado alguna cita en los apartados anteriores. Las referencias deberán contener
+% datos básicos como nombre y apellidos de los autores, título de la obra, evento al que
+% pertenece, páginas, fecha y lugar de celebración (si se tratara de artículos de congreso),
+% ISBN, editorial y ciudad (si se tratara de libro), nombre de revista, páginas, volumen y
+% número (si se tratara de revista), etc.
+
+% Se empleará un formato de referencia reconocido en el ámbito académico como
+% ACM\footnote{http://www.acm.org/sigs/publications/proceedings-templates}\footnote{http://www.cs.ucy.ac.cy/\~{}chryssis/specs/ACM-refguide.pdf}.
+% Otros formatos aconsejables son, por ejemplo, IEEE, AMA, APA y AMA.
+
+% A continuación una sección de «Referencias» con ejemplos de referencias con formato ACM para:
+
+% \begin{itemize}
+% \item Un artículo de revista~\cite{Bow93}.
+% \item Un informe técnico~\cite{Ding97}.
+% \item Un libro~\cite{Tavel07}.
+% \item Un capítulo de libro~\cite{Greiner99}.
+% \item Un artículo en las actas de un congreso~\cite{Frohlic00}.
+% \item Para una página web~\cite{Steele04} (con autores conocidos).
+% \item Para una Web\cite{Oxygen} (con autores desconocidos).
+% \item Para una Web\cite{Arduino} (con autores desconocidos).
+% \end{itemize}
+
+
+\bibliographystyle{alpha}
+\singlespacing
+\bibliography{main}
+% \newpage
+% \section{CONTRATO DE PROPIEDAD INTELECTUAL (si lo hubiera)}
+
+% \newpage
+% \section*{ANEXO I: Descripción de Competencias por Intensificación o Tecnología
+% Específica\footnote{Este anexo se deberá borrar y no deberá ser incluido en el documento de anteproyecto final}}
+
+% \subsection*{Intensificación de Computación}
+
+% \begin{itemize}
+% \item Capacidad para tener un conocimiento profundo de los principios fundamentales y
+%   modelos de la computación y saberlos aplicar para interpretar, seleccionar, valorar,
+%   modelar, y crear nuevos conceptos, teorías, usos y desarrollos tecnológicos relacionados
+%   con la informática.
+% \item Capacidad para conocer los fundamentos teóricos de los lenguajes de programación y
+%   las técnicas de procesamiento léxico, sintáctico y semántico asociadas, y saber
+%   aplicarlas para la creación, diseño y procesamiento de lenguajes.
+% \item Capacidad para evaluar la complejidad computacional de un problema, conocer
+%   estrategias algorítmicas que puedan conducir a su resolución y recomendar, desarrollar e
+%   implementar aquella que garantice el mejor rendimiento de acuerdo con los requisitos
+%   establecidos.
+% \item Capacidad para conocer los fundamentos, paradigmas y técnicas propias de los
+%   sistemas inteligentes y analizar, diseñar y construir sistemas, servicios y aplicaciones
+%   informáticas que utilicen dichas técnicas en cualquier ámbito de aplicación.
+% \item Capacidad para adquirir, obtener, formalizar y representar el conocimiento humano en
+%   una forma computable para la resolución de problemas mediante un sistema informático en
+%   cualquier ámbito de aplicación, particularmente los relacionados con aspectos de
+%   computación, percepción y actuación en ambientes entornos inteligentes.
+% \item Capacidad para desarrollar y evaluar sistemas interactivos y de presentación de
+%   información compleja y su aplicación a la resolución de problemas de diseño de
+%   interacción persona computadora.
+% \item Capacidad para conocer y desarrollar técnicas de aprendizaje computacional y diseñar
+%   e implementar aplicaciones y sistemas que las utilicen, incluyendo las dedicadas a
+%   extracción automática de información y conocimiento a partir de grandes volúmenes de
+%   datos.
+% \end{itemize}
+
+
+% \subsection*{Intensificación de Ingeniería de Computadores}
+
+% \begin{itemize}
+% \item Capacidad de diseñar y construir sistemas digitales, incluyendo computadores,
+%   sistemas basados en microprocesador y sistemas de comunicaciones.
+% \item Capacidad de desarrollar procesadores específicos y sistemas empotrados, así como
+%   desarrollar y optimizar el software de dichos sistemas.
+% \item Capacidad de analizar y evaluar arquitecturas de computadores, incluyendo
+%   plataformas paralelas y distribuidas, así como desarrollar y optimizar software para las
+%   mismas.
+% \item Capacidad de diseñar e implementar software de sistema y de comunicaciones.
+% \item Capacidad de analizar, evaluar y seleccionar las plataformas hardware y software más
+%   adecuadas para el soporte de aplicaciones empotradas y de tiempo real.
+% \item Capacidad para comprender, aplicar y gestionar la garantía y seguridad de los sistemas informáticos.
+% \item Capacidad para analizar, evaluar, seleccionar y configurar plataformas hardware para
+%   el desarrollo y ejecución de aplicaciones y servicios informáticos.
+% \item Capacidad para diseñar, desplegar, administrar y gestionar redes de computadores.
+% \end{itemize}
+
+
+% \subsection*{Intensificación de Ingeniería del Software}
+
+% \begin{itemize}
+% \item Capacidad para desarrollar, mantener y evaluar servicios y sistemas software que
+%   satisfagan todos los requisitos del usuario y se comporten de forma fiable y eficiente,
+%   sean asequibles de desarrollar y mantener y cumplan normas de calidad, aplicando las
+%   teorías, principios, métodos y prácticas de la Ingeniería del Software.
+% \item Capacidad para valorar las necesidades del cliente y especificar los requisitos
+%   software para satisfacer estas necesidades, reconciliando objetivos en conflicto
+%   mediante la búsqueda de compromisos aceptables dentro de las limitaciones derivadas del
+%   coste, del tiempo, de la existencia de sistemas ya desarrollados y de las propias
+%   organizaciones.
+% \item Capacidad de dar solución a problemas de integración en función de las estrategias,
+%   estándares y tecnologías disponibles.
+% \item Capacidad de identificar y analizar problemas y diseñar, desarrollar, implementar,
+%   verificar y documentar soluciones software sobre la base de un conocimiento adecuado de
+%   las teorías, modelos y técnicas actuales.
+% \item Capacidad de identificar, evaluar y gestionar los riesgos potenciales asociados que pudieran presentarse.
+% \item Capacidad para diseñar soluciones apropiadas en uno o más dominios de aplicación
+%   utilizando métodos de la ingeniería del software que integren aspectos éticos, sociales,
+%   legales y económicos.
+% \end{itemize}
+
+
+% \subsection*{Intensificación de Tecnologías de la Información}
+
+% \begin{itemize}
+% \item Capacidad para comprender el entorno de una organización y sus necesidades en el
+%   ámbito de las tecnologías de la información y las comunicaciones.
+% \item Capacidad para seleccionar, diseñar, desplegar, integrar, evaluar, construir,
+%   gestionar, explotar y mantener las tecnologías de hardware, software y redes, dentro de
+%   los parámetros de coste y calidad adecuados.
+% \item Capacidad para emplear metodologías centradas en el usuario y la organización para
+%   el desarrollo, evaluación y gestión de aplicaciones y sistemas basados en tecnologías de
+%   la información que aseguren la accesibilidad, ergonomía y usabilidad de los sistemas.
+% \item Capacidad para seleccionar, diseñar, desplegar, integrar y gestionar redes e
+%   infraestructuras de comunicaciones en una organización.
+% \item Capacidad para seleccionar, desplegar, integrar y gestionar sistemas de información
+%   que satisfagan las necesidades de la organización, con los criterios de coste y calidad
+%   identificados.
+% \item Capacidad de concebir sistemas, aplicaciones y servicios basados en tecnologías de
+%   red, incluyendo Internet, web, comercio electrónico, multimedia, servicios interactivos
+%   y computación móvil.
+% \item Capacidad para comprender, aplicar y gestionar la garantía y seguridad de los sistemas informáticos.
+% \end{itemize}
+
+\end{document}
+
+
+% Local Variables:
+% coding: utf-8
+% mode: flyspell
+% ispell-local-dictionary: "castellano8"
+% mode: latex
+% End:

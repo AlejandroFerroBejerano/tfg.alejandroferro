@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    ...
+    <title>Oshozi</title>
+    ...
+    <link href="{% static 'css/font-awsome.4.7.0.min.css' %}" rel="stylesheet">
+    ...
+  </head>
+  <body>
+    ...    
+  </body>
+</html>

@@ -1,0 +1,14 @@
+def build_event(self, node_event, hw, device_list):
+        if  node_event + 1 <= len(device_list):
+            device = device_list[node_even]
+            event = {
+                'timestamp': str(datetime.datetime.now()).split('.')[0],
+                'kind': device['mode'],
+                'description': device['description'],
+                'location': device['location'],
+                'status': node_event['l_cod']
+            }
+            if self.new_event(event, device):
+                return event
+        else:
+            self.print_msg('\n WARNING: Ghost event recived, the event ' + self.print_event(node_event) + ' will not be created!! \n')

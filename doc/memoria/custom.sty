@@ -1,0 +1,37 @@
+%% -- Escribe aquí tu personalización del estilo
+
+\usepackage{xspace}
+\usepackage{blindtext}
+\usepackage{multirow}
+\usepackage{eurosym}
+\usepackage{color}
+\usepackage{xcolor}
+
+
+\lstloadlanguages{[ISO]C++, Python, XML, bash}
+
+
+\lstdefinestyle{customconsole}{
+  breaklines = true,
+  language = bash,
+  backgroundcolor = \color{lightgray},
+  rulesepcolor    = \color{black},
+}
+
+\lstdefinestyle{customhttp}{
+  breaklines = true,
+  language = Python,
+  rulesepcolor    = \color{black},
+}
+
+\def\esitfg{\emph{esi-tfg}\xspace}
+\def\texcmd#1{\texttt{$\backslash$#1}}
+
+%--- table settings ---
+\usepackage{relsize}
+\usepackage[table]{xcolor}
+
+%\colorlet{tabheadbg}{gray!25}
+%\colorlet{tabrowbg} {gray!12.5}
+
+\newcommand{\zebrarows}[1]{\rowcolors{#1}{}{tabrowbg}}

@@ -1,0 +1,67 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{GHF{\etalchar{+}}07}
+
+\bibitem[Ard14]{Arduino}
+Products: Arduino-yún.
+\newblock \url{http://oxygen.lcs.mit.edu/Overview.html}, Mayo 2014.
+\newblock Arduino products overview, Arduino.
+
+\bibitem[BOE11]{BOE}
+Boe-a-2011-3170.
+\newblock \url{http://www.boe.es/diario_boe/txt.php?id=BOE-A-2011-3170},
+  Febrero 2011.
+\newblock BOE-A-2011-3170.
+
+\bibitem[FB13]{EV1012}
+UTC Fire and Security B.V.
+\newblock Ev1012 series pir detector installation sheet.
+\newblock Technical report, UTC Fire and Security Americas Corporation, Inc,
+  2013.
+
+\bibitem[GHF{\etalchar{+}}07]{garc2007hesperia}
+Carlos Garc, Yolanda Hern{\'a}ndez, Diego Fern{\'a}ndez, Miguel Ferrer,
+  Carlos~M Travieso, Jes{\'u}s~B Alonso, Patr Cia~Henr Quez, et~al.
+\newblock Hesperia: homeland security technologies for the security in public
+  spaces and infrastructures.
+\newblock In {\em Security Technology, 2007 41st Annual IEEE International
+  Carnahan Conference on}, pages 221--226. IEEE, 2007.
+
+\bibitem[Hon15]{Honeywell}
+Productos: Honeywell.
+\newblock
+  \url{http://www.security.honeywell.com/es/productos/intrusion/cp/GalaxyFlex/
+  }, Enero 2015.
+\newblock Honeywell, Security Spain.
+
+\bibitem[Kan15]{Kanban}
+Kanban.
+\newblock \url{https://es.wikipedia.org/wiki/Kanban_(desarrollo)}, Octubre
+  2015.
+\newblock Desarrollo con Kanban.
+
+\bibitem[Len15]{Lenovo}
+Lenovo.
+\newblock
+  \url{http://shop.lenovo.com/es/es/laptops/?menu-id=port%C3%A1tiles_y_ultrabooks},
+  Enero 2015.
+\newblock Lenovo, Products.
+
+\bibitem[PKTV15]{PPavan2015}
+P.~Pavan~Kumar and G.~Tirumala~Vasu.
+\newblock Home automation and security system using android adk.
+\newblock {\em International Journal of Emerging Trends in Engineering
+  Research}, 3(6):190--194, 2015.
+
+\bibitem[Pre02]{Pressman}
+Roger~S. Pressman.
+\newblock {\em Ingeniería del Software Un Enfoque Práctico}.
+\newblock Mc Graw Hill, Edificio Valrealty, 1 planta, Basauri,17, Aravaca,
+  Madrid, 2002.
+
+\bibitem[Ras15]{RaspberryPi2ModelB}
+Raspberry pi 2 model b: Product overview.
+\newblock \url{https://www.raspberrypi.org/products/raspberry-pi-2-model-b/},
+  Febrero 2015.
+\newblock Raspberrypi product overview. RaspberryPi.
+
+\end{thebibliography}

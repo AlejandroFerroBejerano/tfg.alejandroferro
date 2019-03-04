@@ -1,0 +1,9 @@
+
+<!-- pinMode(13, OUTPUT) -->
+http://myArduinoYun.local/arduino/mode/13/output 
+
+<!-- calls digitalRead(13) -->
+http://myArduinoYun.local/arduino/digital/13 
+
+<!-- calls digitalWrite(13,1) -->
+http://myArduinoYun.local/arduino/digital/13/1

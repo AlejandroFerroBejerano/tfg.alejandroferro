@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{% if msg != '' %}
+    <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4>Alert! </h4>
+    <strong>{{msg}}</strong> .
+  </div>
+{% endif %}
+  <h1> {{ username | capfirst }} </h1>
+
+{% endblock %}

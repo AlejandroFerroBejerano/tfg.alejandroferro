@@ -1,0 +1,8 @@
+Python 2.7.12 (default, Jun 29 2016, 08:18:26) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import requests, requests.exceptions, sys, datetime, ast, json
+>>> url='http://127.0.0.1:8081/api/'
+>>> event = {"timestamp": "2017-06-22T23:00:00Z", "kind": "INPUT", "description": "CM SALA COPERNICO", "location": "PB HALL", "status": 2}
+>>> ret=request.post(url, event)
+<Response [201]>

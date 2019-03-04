@@ -1,0 +1,47 @@
+\chapter{Objetivos}
+\label{chap:objetivos}
+
+\drop{U}{}na vez descritos los fundamentos que han motivado este trabajo, como se ha expuesto en el capítulo anterior (ver Capítulo~\ref{chap:introduccion}), a continuación se describe y explica el objetivo general de este \acs{TFG}, así como su alcance. Para poder medir la consecución del objetivo general o principal se han definido una serie de subobjetivos u objetivos específicos que son los que han guiado de una manera u otra todo el desarrollo del trabajo en cuestión.
+
+\section{Objetivo general}
+
+El objetivo principal de este proyecto es el de crear un sistema de seguridad multiplataforma, desde el punto de vista de la operabilidad por parte del usuario final, que permita gestionar elementos de detección y actuación de grado 2 y grado 3 de una forma cómoda, sencilla e intuitiva.
+
+Para ello, y complementando esta idea, se creará una solución sobre hardware de bajo coste, libre y de propósito general, con el fin no solo de hacer más asequible la implantación en un entorno real, sino también facilitar la adaptación e integración de cualquier otro dispositivo que comparta la misma arquitectura o diseño base.
+
+
+\section{Objetivos específicos}
+
+Para poder cumplir el objetivo general marcado y obtener un sistema como el descrito, se definen una serie de objetivos específicos funcionales:
+
+\subsection{Tolerancia a fallos}
+El sistema  debe de ser capaz de  tener una arquitectura  tolerante a
+ciertos fallos como puedan ser la  caída de la aplicación de gestión o
+la de una  de las controladoras de sensores, dando  al usuario final o
+al  administrador del  sistema, información  de lo  que acontece  y ha
+acontecido a  través de logs o  de la visualización en  tiempo real de
+mensajes por consola.
+
+\subsection{Capacidad integradora}
+Este es uno de los aspectos más importantes del desarrollo de la aplicación, pues expuestas las necesidades que motivan el mismo, una de las más importantes es dar una solución abierta que permita la gestión de diferentes elementos y subsistemas de seguridad, propios o de terceros.
+
+\subsection{Autenticación}
+La autenticación es un objetivo esencial  dentro de cualquier concepto que incluya
+la palabra seguridad. Aunque su alcance pueda ser bastante amplio en cuanto a 
+los niveles en los que se pueda implantar, para nuestro trabajo se considera fundamental su uso en la  aplicación de gestión. Como complemento a esta idea también se aplicará a algunos de los mecanismos desarrollados que  permitirán la  integración de terceros y de otros
+elementos o  subsistemas de  seguridad. 
+
+Este objetivo persigue la consecución de al menos dos roles de usuarios, el de \textit{administrador}, con control total sobre toda la arquitectura y componentes desarrollados y el de \textit{operador}, con únicamente capacidad de gestión sobre la información gestionada por la aplicación web.
+
+\subsection{Estados bien conocidos y definidos}
+El sistema debe ser capaz de brindar información actualizada y veraz sobre el estado de cada uno de los sensores y además deberá discernir entre los estados de \textit{alarma}, \textit{reposo}, \textit{sabotaje}, \textit{cortocircuito} y \textit{enmascaramiento} del sensor, en caso de que este disponga de esta última opción.
+
+\subsection{Interfaz amigable}
+Nuestro sistema de seguridad deberá contar con una interfaz de usuario
+sencilla,  cómoda e  intuitiva, que  permita  al operador  final de  un
+vistazo comprender qué incidencias han tenido lugar y en que estado se
+encuentra la instalación en ese  momento.
+
+\subsection{Relación de costes bajo}
+Dada la índole de este trabajo y las características del mercado, es fundamental conseguir que el despliegue de lo que sería la electrónica
+de gestión del sistema, no los sensores, de una instalación de 1 a 6 elementos, no exceda los 120\euro{} en costes. De igual manera que se pudiese mejorar la proporcionalidad de esta cifra para instalaciones medias entre 7 y 35 elementos.

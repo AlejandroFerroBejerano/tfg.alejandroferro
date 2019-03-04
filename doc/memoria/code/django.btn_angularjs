@@ -1,0 +1,7 @@
+ $scope.refresh = function() {
+    $http.get('data/events.json').success(function(events) {
+      $scope.events = events;
+    }).error(function(){
+      $scope.error = "Could not load Events information";
+    });
+  };

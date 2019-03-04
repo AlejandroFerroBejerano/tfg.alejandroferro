@@ -1,0 +1,12 @@
+[
+{
+    "fields": {
+        "timestamp": "2015-06-19T12:36:16Z",
+        "kind": "INPUT",
+        "description": "CM ENTRADA PRINCIPAL",
+        "location": "PLANTA BAJA",
+        "status": 1
+    },
+    "model": "main.event"
+}
+]

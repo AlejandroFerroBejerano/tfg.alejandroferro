@@ -1,0 +1,12 @@
+\begin{tabular}{p{0.48\textwidth}p{0.48\textwidth}}
+  \hline
+  \textbf{Fórmula Obtención Valores} & int value = analog\_int\_value * (5/1023) \\
+  \hline
+\textbf{Estado} & \textbf{Valor} \\
+\hline
+Alarma & 820 <= \textit{valor\_del\_sensor} <= 840 \\
+Reposo & 400 <= \textit{valor\_del\_sensor} <= 420 \\
+Tamper & \textit{valor\_del\_sensor} >= 841 \\
+Cortocircuito & \textit{valor\_del\_sensor} $\neq$ Alarma, Reposo o Tamper \\
+\hline
+\end{tabular}

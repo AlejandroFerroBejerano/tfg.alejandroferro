@@ -1,0 +1,5 @@
+$ echo "deb http://nginx.org/packages/debian/ squeeze nginx" > nginx.list
+$ echo "deb-src http://nginx.org/packages/debian/ squeeze nginx" >> nginx.list
+$ sudo mv nginx.list /etc/apt/sources.list.d
+$ sudo apt-get update
+$ sudo apt-get install nginx

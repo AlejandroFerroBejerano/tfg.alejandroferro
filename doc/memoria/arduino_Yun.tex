@@ -1,0 +1,42 @@
+\chapter{Arduino-Yún}
+\label{chap:anexo3}
+
+\section{Visión Global}
+
+El Arduino Yún es una placa  electrónica que fusiona dos entornos para
+ofrecer  lo mejor  de  ambos. Por  una parte  tenemos  un entorno  con
+distribución  Linux  basado  en  OpenWrt  denominado  OpenWrt-Yún  que
+incorpora  un  procesador  Atheros   AR9331,  que  permite  todas  las
+funcionalidades  básicas  de un  sistema  operativo.   Por otra  parte
+tenemos  el microcontrolador  ATmega32u4 que,  al igual  que en  otros
+modelos de  Arduino, se  encarga de  la ejecución  de subrutinas  y el
+control de los canales  de entrada/salida, solo que  en este caso la
+placa cuenta con  un bridge de comunicaciones que  confiere al entorno
+Arduino  la capacidad  ejecutar  scripts shells,  comunicarse con  las
+interfaces de red y recibir información de su entorno vecino.
+
+\section{Especificaciones Técnicas}
+
+\begin{table}[h!]
+  \centering
+  \caption{Características Arduino-Yún. \cite{Arduino-Yun} }
+  \label{tab:arduino-yun}
+  \begin{tabular}{{p{0.325\linewidth}p{0.325\linewidth}p{0.325\linewidth}}}
+    \hline
+    \multicolumn{1}{l}{} & \textbf{Característica} & \textbf{Valor}\\
+    \hline
+      \multirow{6}{*}{Entorno Linux}  & \cellcolor[HTML]{E6E6E6} Procesador & \cellcolor[HTML]{E6E6E6} Atheros AR9331\\
+                                      & Arquitectura & MIPS @400 MHz \\
+                                      & \cellcolor[HTML]{E6E6E6} RAM & \cellcolor[HTML]{E6E6E6} 64MB DDR2 \\
+                                      & Memoria FLASH & 16 MB \\
+                                      & \cellcolor[HTML]{E6E6E6} Ethernet & \cellcolor[HTML]{E6E6E6} IEEE 802.3 10/100Mbit/s \\
+                                      & WiFi & IEEE 802.11b/g/n \\
+                                      \hline
+    \multirow{6}{*}{Entorno Arduino}  & \cellcolor[HTML]{E6E6E6} Microcontrolador & \cellcolor[HTML]{E6E6E6} ATmega32u4\\
+                                      &  Frecuencia Reloj & 16 MHZ \\
+                                      & \cellcolor[HTML]{E6E6E6} SRAM & \cellcolor[HTML]{E6E6E6} 2.5 KB \\
+                                      &  Memoria FLASH & 32 KB \\
+                                      &  \cellcolor[HTML]{E6E6E6} EEPROM & \cellcolor[HTML]{E6E6E6} 1 KB \\
+                                      & Entradas Analógicas & 20 \\
+  \end{tabular}
+\end{table}

@@ -1,0 +1,2 @@
+sqlite> .schema main_hwcontroller
+CREATE TABLE "main_hwcontroller" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "address" char(39) NOT NULL, "description" varchar(100) NOT NULL);

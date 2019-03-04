@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+  EVENT LOG MONITOR
+{% endblock %}
+
+{% block head %}
+<script src="{% static 'js/app.js' %}"></script>
+<script src="{% static 'js/controllers.js' %}"></script>
+{% endblock %}
+
+
+
+{% block content %}
+  <div ng-app="oshoziApp" >
+    <div ng-controller="EventLogCtrl" data-ng-init="clean_cloak()">
+        <div ng-if="events.length >= 1" data-ng-init="clean_cloak()">
+          <div id="div1" class="panel panel-default my-cloak [[clean_cloak]]">
+            <div class="panel-heading">
+              <form>
+                <div class="row">
+                  <a class="btn btn-success btn-sm col-sm-offset-10" ng-click="refresh()">
+                    <i class="fa fa-refresh fa-2x fa-spin-hover"></i>
+                    <label class="txt-btn">&nbsp;&nbsp;Refresh</label>
+                  </a>   
+                </div>
+              </form>
+            </div>
+            <div class="panel-body">
+            <form>
+                <div class="form-group">
+                  <div class="input">
+                      <input type="text" class="form-control" placeholder="Search by any parameters
+                        " ng-model="searchMessage"> 
+                  </div>
+                </div>
+              </form>
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <td class="center-td" ng-init = "sortType = 'date'; sortReverse = !sortReverse">
+                      <a class="btn btn-td btn-default btn-sm" ng-click="sortType = 'date'; sortReverse = !sortReverse">
+                        <span ng-hide="sortType == 'date' && !sortReverse">
+                          <i class="fa fa-1x fa-calendar">&nbsp;&nbsp;Date</i>
+                          <i class="fa fa-1x fa-arrow-circle-down" ></i>
+                        </span>
+                        <span class="fa-x-reverse" ng-show="sortType == 'date' && !sortReverse">
+                          <i class="fa fa-1x fa-calendar">&nbsp;&nbsp;Date</i>
+                          <i class="fa fa-1x fa-arrow-circle-up"></i>
+                        </span>
+                      </a>
+                    </td>
+                    <td class="center-td" ng-init="sortType = 'time'; sortReverse = !sortReverse">
+                      <a class="btn btn-td btn-default btn-sm" ng-click="sortType = 'time'; sortReverse = !sortReverse">
+                        <span ng-hide="sortType == 'time' && !sortReverse">
+                          <i class="fa fa-1x fa-clock-o">&nbsp;&nbsp;Time</i>
+                          <i class="fa fa-1x fa-arrow-circle-down"></i>
+                        </span>
+                        <span class="fa-x-reverse" ng-show="sortType == 'time' && !sortReverse">
+                          <i class="fa fa-1x fa-clock-o">&nbsp;&nbsp;Time</i>
+                          <i class="fa fa-1x fa-arrow-circle-up"></i>
+                        </span>
+                      </a>
+                    </td>
+                    <td class="center-td">
+                      <a class="btn btn-td btn-default btn-sm" ng-click="sortType = 'kind'; sortReverse = !sortReverse">
+                        <span ng-hide="sortType == 'kind' && !sortReverse">
+                          <i class="fa fa-1x fa-flag">&nbsp;&nbsp;Kind</i>
+                          <i class="fa fa-1x fa-arrow-circle-down" ></i>
+                        </span>
+                        <span class="fa-x-reverse" ng-show="sortType == 'kind' && !sortReverse">
+                          <i class="fa fa-1x fa-flag">&nbsp;&nbsp;Kind</i>
+                          <i class="fa fa-1x fa-arrow-circle-up"></i>
+                        </span>
+                      </a>
+                    </td>
+                    <td class="center-td">
+                      <a class="btn btn-td btn-default btn-sm" ng-click="sortType = 'description'; sortReverse = !sortReverse">
+                        <span ng-hide="sortType == 'description' && !sortReverse">
+                          <i class="fa fa-1x fa-bars">&nbsp;&nbsp;Description</i>
+                          <i class="fa fa-1x fa-arrow-circle-down"></i>
+                        </span>
+                        <span class="fa-x-reverse" ng-show="sortType == 'description' && !sortReverse">
+                          <i class="fa fa-1x fa-bars">&nbsp;&nbsp;Description</i>
+                          <i class="fa fa-1x fa-arrow-circle-up"></i>
+                        </span>
+                      </a>
+                    </td>
+                    <td class="center-td">
+                      <a class="btn btn-td btn-default btn-sm" ng-click="sortType = 'location'; sortReverse = !sortReverse">
+                        <span ng-hide="sortType == 'location' && !sortReverse">
+                          <i class="fa fa-1x fa-map-marker">&nbsp;&nbsp;Location</i>
+                          <i class="fa fa-1x fa-arrow-circle-down" ></i>
+                        </span>
+                        <span class="fa-x-reverse" ng-show="sortType == 'location' && !sortReverse">
+                          <i class="fa fa-1x fa-map-marker">&nbsp;&nbsp;Location</i>
+                          <i class="fa fa-1x fa-arrow-circle-up"></i>
+                        </span>
+                      </a>
+                    </td>
+                    <td class="center-td">
+                      <a class="btn btn-td btn-default btn-sm" ng-click="sortType = 'states'; sortReverse = !sortReverse">
+                        <span ng-hide="sortType == 'states' && !sortReverse">
+                          <i class="fa fa-1x  fa-thermometer-quarter">&nbsp;&nbsp;States</i>
+                          <i class="fa fa-1x fa-arrow-circle-down" ></i>
+                        </span>
+                        <span class="fa-x-reverse" ng-show="sortType == 'states' && !sortReverse">
+                          <i class="fa fa-1x  fa-thermometer-quarter">&nbsp;&nbsp;States</i>
+                          <i class="fa fa-1x fa-arrow-circle-up"></i>
+                        </span>
+                      </a>
+                    </td>
+                    <td class="center-td">
+                      <a class="btn btn-td btn-default btn-sm" ng-click="sortType = 'group'; sortReverse = !sortReverse">
+                        <span ng-hide="sortType == 'group' && !sortReverse">
+                          <i class="fa fa-1x  fa-object-group">&nbsp;&nbsp;Group</i>
+                          <i class="fa fa-1x fa-arrow-circle-down"></i>
+                        </span>
+                        <span class="fa-x-reverse" ng-show="sortType == 'group' && !sortReverse">
+                          <i class="fa fa-1x  fa-object-group">&nbsp;&nbsp;Group</i>
+                          <i class="fa fa-1x fa-arrow-circle-up"></i>
+                        </span>
+                      </a>
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="[[ get_color(event.status.color) ]]" ng-repeat="event in events | orderBy:sortType:sortReverse | filter:searchMessage">
+                    <td>[[ event.date ]]</td>
+                    <td>[[ event.time ]]</td>
+                    <td>[[ event.kind ]]</td>
+                    <td>[[ event.description ]]</td>
+                    <td>[[ event.location ]]</td>
+                    <td>[[ event.status.description ]]</td>
+                    <td class="img-td"><img ng-src="/media/[[ event.status.image.url ]]" width="32"></td>
+                  </tr>
+                </tbody>
+              </table> 
+            </div>  
+          </div>
+        </div>
+
+      <div id="div1" ng-if="events.length == 0 || !events " style="padding: 20px 20px" data-ng-init="clean_cloak()">
+        <div id="noEventAviable" class="panel panel-warning my-cloak">
+          <div class="panel-heading" >
+            <h3 class="panel-title">Events Unaviable</h3>
+          </div>
+          <div class="panel-body">
+            <i>No events information aviable rigth now. Please, reload this page or wait a few minutes .</i>
+          </div>   
+        </div>
+      </div>
+    </div>
+  </div data-ng-init="clean_cloak()>
+
+{% endblock %}
